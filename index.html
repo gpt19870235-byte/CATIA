@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>每日行程規劃表</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>每日行程規劃表</h1>
+      <p id="todayLabel" class="today-label"></p>
+    </header>
+
+    <section class="planner-controls" aria-label="新增行程">
+      <input id="taskInput" type="text" placeholder="輸入行程內容（例如：09:00 開晨會）" maxlength="120" />
+      <button id="addBtn" type="button">新增行程</button>
+    </section>
+
+    <section class="planner-list" aria-label="今日行程清單">
+      <ul id="taskList"></ul>
+      <p id="emptyHint" class="empty-hint">今天還沒有行程，先新增一筆吧！</p>
+    </section>
+
+    <footer class="planner-footer">
+      <button id="clearCompletedBtn" type="button" class="secondary">清除已完成</button>
+      <button id="clearAllBtn" type="button" class="danger">清空全部</button>
+    </footer>
+  </main>
+
+  <template id="taskTemplate">
+    <li class="task-item">
+      <label>
+        <input class="task-checkbox" type="checkbox" />
+        <span class="task-text"></span>
+      </label>
+      <button class="delete-btn" type="button" aria-label="刪除行程">刪除</button>
+    </li>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
