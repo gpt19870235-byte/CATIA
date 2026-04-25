@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-header">記錄刀具使用分鐘</div>
+  <div class="card-body">
+    <form method="post" action="/usage" class="row g-3">
+      <div class="col-md-4">
+        <label class="form-label">刀具</label>
+        <select name="tool_id" class="form-select" required>
+          {% for t in tools %}
+          <option value="{{ t.id }}">{{ t.code }} - {{ t.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-4"><label class="form-label">使用分鐘</label><input name="minutes_used" type="number" min="1" class="form-control" required /></div>
+      <div class="col-md-4"><label class="form-label">工單</label><input name="work_order" class="form-control" /></div>
+      <div class="col-md-4"><label class="form-label">機台</label><input name="machine_name" class="form-control" /></div>
+      <div class="col-12"><button class="btn btn-primary">送出</button></div>
+    </form>
+  </div>
+</div>
+{% endblock %}

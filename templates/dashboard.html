@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row g-3 mb-4">
+  <div class="col-md-4">
+    <div class="card shadow-sm"><div class="card-body"><h6>刀具總數</h6><h2>{{ total_tools }}</h2></div></div>
+  </div>
+  <div class="col-md-4">
+    <div class="card shadow-sm border-warning"><div class="card-body"><h6>低庫存警示</h6><h2>{{ low_stock_count }}</h2></div></div>
+  </div>
+  <div class="col-md-4">
+    <div class="card shadow-sm border-danger"><div class="card-body"><h6>壽命到期</h6><h2>{{ life_alert_count }}</h2></div></div>
+  </div>
+</div>
+
+<div class="card shadow-sm mb-4">
+  <div class="card-header">刀具清單</div>
+  <div class="table-responsive">
+    <table class="table table-striped mb-0">
+      <thead>
+        <tr>
+          <th>編號</th><th>名稱</th><th>機台</th><th>目前庫存</th><th>安全庫存</th><th>使用分鐘</th><th>壽命上限</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for tool in tools %}
+        <tr>
+          <td>{{ tool.code }}</td>
+          <td>{{ tool.name }}</td>
+          <td>{{ tool.applicable_machine }}</td>
+          <td>{{ tool.current_stock }}</td>
+          <td>{{ tool.safety_stock }}</td>
+          <td>{{ tool.used_minutes_total }}</td>
+          <td>{{ tool.life_minutes_limit }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card shadow-sm">
+  <div class="card-header">最近異動</div>
+  <div class="table-responsive">
+    <table class="table mb-0">
+      <thead><tr><th>時間</th><th>類型</th><th>刀具ID</th><th>數量</th><th>人員</th><th>工單</th></tr></thead>
+      <tbody>
+        {% for t in recent_txn %}
+        <tr>
+          <td>{{ t.created_at }}</td><td>{{ t.transaction_type.value }}</td><td>{{ t.tool_id }}</td><td>{{ t.quantity }}</td><td>{{ t.operator_name }}</td><td>{{ t.work_order }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
