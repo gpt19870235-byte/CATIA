@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-header">庫存異動</div>
+  <div class="card-body">
+    <form method="post" action="/transactions" class="row g-3">
+      <div class="col-md-4">
+        <label class="form-label">刀具</label>
+        <select name="tool_id" class="form-select" required>
+          {% for t in tools %}
+          <option value="{{ t.id }}">{{ t.code }} - {{ t.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">類型</label>
+        <select name="transaction_type" class="form-select" required>
+          <option value="IN">入庫 IN</option>
+          <option value="OUT">領用 OUT</option>
+          <option value="RETURN">歸還 RETURN</option>
+          <option value="SCRAP">報廢 SCRAP</option>
+        </select>
+      </div>
+      <div class="col-md-4"><label class="form-label">數量</label><input name="quantity" type="number" min="1" class="form-control" required /></div>
+      <div class="col-md-4"><label class="form-label">操作員</label><input name="operator_name" class="form-control" /></div>
+      <div class="col-md-4"><label class="form-label">工單</label><input name="work_order" class="form-control" /></div>
+      <div class="col-md-4"><label class="form-label">機台</label><input name="machine_name" class="form-control" /></div>
+      <div class="col-12"><label class="form-label">備註</label><input name="note" class="form-control" /></div>
+      <div class="col-12"><button class="btn btn-primary">送出異動</button></div>
+    </form>
+  </div>
+</div>
+{% endblock %}
